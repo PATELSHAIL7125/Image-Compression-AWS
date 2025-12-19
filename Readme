@@ -1,0 +1,50 @@
+# Serverless Image Resizer using AWS
+
+A **serverless image resizing web application** built using **AWS Lambda, API Gateway, S3, and a static frontend**.  
+Users can upload an image, AWS resizes it automatically, and a secure **presigned URL** is generated for downloading the resized image.
+
+---
+
+## 🚀 Features
+
+- Upload image from frontend
+- Store **original image** in S3 (`uploads/` folder)
+- Resize image using **AWS Lambda + Sharp**
+- Store resized image in S3 (`resized/` folder)
+- Generate **secure presigned download URL**
+- Fully **serverless architecture**
+- Runs within **AWS Free Tier**
+
+---
+
+## 🏗️ Architecture Overview
+
+Frontend (HTML)
+|
+| Upload Image
+v
+API Gateway (REST API)
+|
+v
+AWS Lambda (Node.js 20.x)
+|
+|-- uploads/ → Original Image (Private)
+|-- resized/ → Resized Image (Private)
+v
+Amazon S3
+
+
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: HTML, JavaScript
+- **Backend**: AWS Lambda (Node.js 20.x)
+- **Image Processing**: Sharp (Lambda Layer)
+- **API**: Amazon API Gateway (REST)
+- **Storage**: Amazon S3
+- **Security**: Presigned URLs
+- **Hosting**: S3 Static Website Hosting
+
+
