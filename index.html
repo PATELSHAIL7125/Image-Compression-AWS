@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AWS Image Resizer</title>
+</head>
+<body>
+  <h2>Upload Image</h2>
+  <input type="file" id="file" />
+  <button onclick="upload()">Upload & Resize</button>
+
+  <p id="status"></p>
+  <a id="download" target="_blank"></a>
+
+  <script>
+    async function upload() {
+      const file = document.getElementById("file").files[0];
+      const reader = new FileReader();
+
+      reader.onloadend = async () => {
+        const base64 = reader.result.split(",")[1];
+
+        const res = await fetch("https://gmrai8uxkf.execute-api.ap-south-1.amazonaws.com/prod/resize", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ image: base64 }),
+        });
+
+        const data = await res.json();
+        document.getElementById("status").innerText = data.message;
+        document.getElementById("download").href = data.downloadUrl;
+        document.getElementById("download").innerText = "Download Resized Image";
+      };
+
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>
